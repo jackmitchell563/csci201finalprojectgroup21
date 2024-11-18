@@ -4,7 +4,7 @@ public class Exercise {
     private int id;
     private int userId;
     private LocalDate date;
-    private String type; // Changed 'name' to 'type'
+    private String type; 
     private double weight;
     private int repetitions;
     private int sets;
