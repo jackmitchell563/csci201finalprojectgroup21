@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FitnessTracker {
     private int userId;
     private List<Exercise> exercises;

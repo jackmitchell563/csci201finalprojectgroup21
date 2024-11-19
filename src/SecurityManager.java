@@ -1,4 +1,6 @@
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class SecurityManager {
 	 public static String hashPassword(String password) {
@@ -11,6 +13,7 @@ public class SecurityManager {
 
 	           
 	            return Base64.getEncoder().encodeToString(hashedBytes);
+	            
 	        } catch (NoSuchAlgorithmException e) {
 	          
 	            throw new RuntimeException("Error: SHA-256 algorithm not found.", e);
@@ -18,8 +21,8 @@ public class SecurityManager {
 	    }
 
 	 public boolean verifyPassword(String hashedPassword, String inputPassword) {
-	        // Hash the input password and compare with the stored hash
 	        String hashedInput = hashPassword(inputPassword);
 	        return hashedPassword.equals(hashedInput);
-	    }}
-}
+	    }
+	 }
+
