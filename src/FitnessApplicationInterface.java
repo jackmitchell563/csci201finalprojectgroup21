@@ -5,16 +5,20 @@ public class FitnessApplicationInterface {
 
     public void createAccount(String name, String email, String password, int age, char gender, int height, int weight) {
         // Validate input
-        if (name == null || name.isEmpty()) {
+    	
+    	// should also check if email is taken... 
+    	
+    	 
+        if (name == null || name.isEmpty()) { // if left empty 
             throw new IllegalArgumentException("Name cannot be empty.");
         }
-        if (email == null || email.isEmpty() || !email.contains("@")) {
+        if (email == null || email.isEmpty() || !email.contains("@")) { // 
             throw new IllegalArgumentException("Invalid email address.");
         }
-        if (password == null || password.length() < 8) {
+        if (password == null || password.length() < 8) { // not sure what the rquirements are yet tho... double checl 
             throw new IllegalArgumentException("Password must be at least 8 characters long.");
         }
-        if (age <= 0) {
+        if (age <= 0) { // valid inputs for the age + basic information 
             throw new IllegalArgumentException("Age must be greater than 0.");
         }
         if (gender != 'M' && gender != 'F' && gender != 'O') {
