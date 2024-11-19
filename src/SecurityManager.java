@@ -1,4 +1,6 @@
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class SecurityManager {
 	 public static String hashPassword(String password) {
@@ -21,5 +23,5 @@ public class SecurityManager {
 	        // Hash the input password and compare with the stored hash
 	        String hashedInput = hashPassword(inputPassword);
 	        return hashedPassword.equals(hashedInput);
-	    }}
+	    }
 }

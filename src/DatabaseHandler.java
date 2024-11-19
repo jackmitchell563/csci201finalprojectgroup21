@@ -1,6 +1,5 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,18 +8,26 @@ import java.sql.Date;
 import java.util.List;
 
 public class DatabaseHandler {
+	private static final String URL = "jdbc:mysql://localhost/FitnessTracker";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "rootPassword"; // change to your password
+    
 	private Connection connection;
 	private Statement st;
 	private ResultSet rs;
 
 	public DatabaseHandler() {
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/FitnessTracker?user=root&password=rootPassword");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/FitnessTracker?user=root&password=rootPassword");  
 			st = connection.createStatement();
 		}
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public static Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 	}
 
 	public void saveUser(RegisteredUser user) {
