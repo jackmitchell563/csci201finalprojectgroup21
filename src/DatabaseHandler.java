@@ -12,12 +12,6 @@ public class DatabaseHandler {
 	private Connection connection;
 	private Statement st;
 	private ResultSet rs;
-	
-	public static void main(String[] args) {
-		DatabaseHandler handler = new DatabaseHandler();
-		RegisteredUser user = new RegisteredUser("aarushi", 20, 'F', 66, 130, "aarushigarg@gmail.com", "111", "Lose weight");
-		handler.saveUser(user);
-	}
 
 	public DatabaseHandler() {
 		try {
