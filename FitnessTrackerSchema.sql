@@ -23,14 +23,6 @@ CREATE TABLE Exercise (
     repetitions INT,
     sets INT,
     duration_mins INT,
+    is_AI_Suggestion INT,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
-
-CREATE TABLE AISuggestions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    exercise_id INT NOT NULL,
-    date DATE NOT NULL,
-    suggestion TEXT,
-    FOREIGN KEY (exercise_id) REFERENCES Exercise(id)
-);
-

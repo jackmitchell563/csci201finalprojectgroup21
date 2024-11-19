@@ -1,24 +1,27 @@
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Exercise {
     private int id;
     private int userId;
-    private LocalDate date;
-    private String type; 
-    private double weight;
+    private Date date;
+    private String name; 
     private int repetitions;
     private int sets;
-    private double durationMins;
+    private int durationMins;
+    private Boolean isAISuggestion;
 
-    public Exercise(int id, int userId, LocalDate date, String type, double weight, int repetitions, int sets, double durationMins) {
+    public Exercise(int id, int userId, Date date, String name, int repetitions, int sets, int durationMins, int isAISuggestion) {
         this.id = id;
         this.userId = userId;
         this.date = date;
-        this.type = type;
-        this.weight = weight;
+        this.name = name;
         this.repetitions = repetitions;
         this.sets = sets;
         this.durationMins = durationMins;
+        if (isAISuggestion == 1)
+        	this.setIsAISuggestion(true);
+        else
+        	this.setIsAISuggestion(false);
     }
 
     public int getId() {
@@ -37,28 +40,20 @@ public class Exercise {
         this.userId = userId;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
     public String getType() {
-        return type;
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setType(String name) {
+        this.name = name;
     }
 
     public int getRepetitions() {
@@ -81,18 +76,25 @@ public class Exercise {
         return durationMins;
     }
 
-    public void setDuration(double durationMins) {
+    public void setDuration(int durationMins) {
         this.durationMins = durationMins;
     }
 
-    @Override
+	public Boolean getIsAISuggestion() {
+		return isAISuggestion;
+	}
+
+	public void setIsAISuggestion(Boolean isAISuggestion) {
+		this.isAISuggestion = isAISuggestion;
+	}
+	
+	@Override
     public String toString() {
         return "Exercise{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", date=" + date +
-                ", type='" + type + '\'' +
-                ", weight=" + weight +
+                ", name='" + name + '\'' +
                 ", repetitions=" + repetitions +
                 ", sets=" + sets +
                 ", durationMins=" + durationMins +

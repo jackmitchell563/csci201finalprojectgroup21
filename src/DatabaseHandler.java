@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class DatabaseHandler {
@@ -83,7 +83,8 @@ public class DatabaseHandler {
 	            int repetitions = rs.getInt("repetitions");
 	            int sets = rs.getInt("sets");
 	            int durationMins = rs.getInt("duration_mins");
-	            Exercise exercise = new Exercise(id, userId, date, name, repetitions, sets, durationMins);
+	            int isAISuggestion = rs.getInt("is_AI_Suggestion");
+	            Exercise exercise = new Exercise(id, userId, date, name, repetitions, sets, durationMins, isAISuggestion);
 	            exercises.add(exercise);
 	        }
 	    } catch (SQLException e) {
@@ -92,54 +93,6 @@ public class DatabaseHandler {
 	    return exercises;
 	}
 
-	public void saveAISuggestion(int userId, Date date, String suggestion) {
-	    try {
-	        String query = String.format("INSERT INTO AISuggestions (user_id, date, suggestion) "
-	                                   + "VALUES ('%d', '%tF', '%s')", 
-	                                     userId, date, suggestion);
-	        st.executeUpdate(query);
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-
-	public List<AISuggestion> getAISuggestionsByUserId(int exerciseId) {
-	    List<AISuggestion> suggestions = new ArrayList<>();
-	    String query = String.format("SELECT * FROM AISuggestions WHERE exercise_id=%d", exerciseId);
-	    try {
-	        ResultSet rs = st.executeQuery(query);
-	        while (rs.next()) {
-	            int id = rs.getInt("id");
-	            Date date = rs.getDate("date");
-	            String suggestion = rs.getString("suggestion");
-	            AISuggestion aiSuggestion = new AISuggestion(id, exerciseId, date, suggestion);
-	            suggestions.add(aiSuggestion);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return suggestions;
-	}
-
-	public void saveGuest(Guest guest) {
-	    String query = "INSERT INTO Users (name, isGuest, createdAt) VALUES (?, true, NOW())";
-	    try (PreparedStatement ps = connection.prepareStatement(query)) {
-	        ps.setString(1, guest.getName());
-	        ps.executeUpdate();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-	public void deleteGuestData() {
-	    String query = "DELETE FROM Users WHERE isGuest = true AND createdAt < NOW() - INTERVAL 1 DAY";
-	    try {
-	        st.executeUpdate(query);
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
 	
 	public void closeHandler() {
 		try {
