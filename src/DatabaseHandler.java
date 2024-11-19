@@ -122,6 +122,24 @@ public class DatabaseHandler {
 	    return suggestions;
 	}
 
+	public void saveGuest(Guest guest) {
+	    String query = "INSERT INTO Users (name, isGuest, createdAt) VALUES (?, true, NOW())";
+	    try (PreparedStatement ps = connection.prepareStatement(query)) {
+	        ps.setString(1, guest.getName());
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void deleteGuestData() {
+	    String query = "DELETE FROM Users WHERE isGuest = true AND createdAt < NOW() - INTERVAL 1 DAY";
+	    try {
+	        st.executeUpdate(query);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	public void closeHandler() {
 		try {
