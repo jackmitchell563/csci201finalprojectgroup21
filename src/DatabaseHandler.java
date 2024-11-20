@@ -30,6 +30,9 @@ public class DatabaseHandler {
 		return DriverManager.getConnection(URL, USERNAME, PASSWORD);
 	}
 
+	
+	
+	
 	public void saveUser(RegisteredUser user) {
 		try {
 			String query = String.format("INSERT INTO Users (name, age, gender, height_inches, weight_pounds, email, hashed_password, goal) "
