@@ -14,7 +14,7 @@ public class HttpRequestHandler implements Runnable {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-            String headerLine = in.readLine();
+            String headerLine = in.readLine();  // <HTTP Method> <URI> <HTTP Version>
             if (headerLine == null) return;
 
             String[] requestTokens = headerLine.split(" ");

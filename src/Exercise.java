@@ -87,17 +87,4 @@ public class Exercise {
 	public void setIsAISuggestion(Boolean isAISuggestion) {
 		this.isAISuggestion = isAISuggestion;
 	}
-	
-	@Override
-    public String toString() {
-        return "Exercise{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", date=" + date +
-                ", name='" + name + '\'' +
-                ", repetitions=" + repetitions +
-                ", sets=" + sets +
-                ", durationMins=" + durationMins +
-                '}';
-    }
 }
