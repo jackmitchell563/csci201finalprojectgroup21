@@ -1,11 +1,18 @@
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.util.concurrent.locks.ReentrantLock;
+import com.google.gson.Gson;
 
 
 public class UserDatabaseAccess {
-	private static final ReentrantLock lock = new ReentrantLock();
-    private static final Gson gson = new Gson();
+	  private static final String URL = "jdbc:mysql://localhost:3306/fitnessdb";
+	    private static final String DB_USER = "root"; // SQL database... will be working on this
+	    private static final String DB_PASSWORD = "password";
+	    
+	    
+	    private static final Gson gson = new Gson();
+	    private static final ReentrantLock lock = new ReentrantLock();
+
     static class User {
         int id;
         String name;
