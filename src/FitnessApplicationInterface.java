@@ -1,12 +1,12 @@
 public class FitnessApplicationInterface {
     private FitnessTracker tracker;
     private RegisteredUser registeredUser;
-    private Guest guestUser;
 
-    public void createAccount(String name, String email, String password, int age, char gender, int height, int weight) {
+    public void createAccount(String name, String email, String password, int age, char gender, int height, int weight,String goal) {
         // Validate input
     	
     	// should also check if email is taken... 
+    	// save to database? 
     	
     	 
         if (name == null || name.isEmpty()) { // if left empty 
@@ -32,7 +32,8 @@ public class FitnessApplicationInterface {
         String hashedPassword = SecurityManager.hashPassword(password);
 
         // Create a new RegisteredUser instance
-        this.registeredUser = new RegisteredUser(name, email, hashedPassword, age, gender, height, weight);
+        this.registeredUser = new RegisteredUser(name, age, gender, height, weight, email, hashedPassword, goal);
+
 
         // Print confirmation message
         System.out.println("Account successfully created for: " + name);

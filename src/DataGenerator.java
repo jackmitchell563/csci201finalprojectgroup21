@@ -43,15 +43,10 @@ public class DataGenerator {
             int repetitions = rand.nextInt(20) + 5; // Between 5 and 25 reps
             int sets = rand.nextInt(5) + 1;         // Between 1 and 5 sets
             int durationMins = rand.nextInt(60) + 10; // Between 10 and 70 minutes
+            int isAISuggestion = rand.nextInt(20) + 5; 
 
-            exercises.add(new Exercise(0, userId, date, name, repetitions, sets, durationMins));
+            exercises.add(new Exercise(0, userId, date, name, repetitions, sets, durationMins,isAISuggestion));
         }
         return exercises;
     }
-
-    public static Guest generateGuestUser() {
-        Random rand = new Random();
-        String name = "Guest" + rand.nextInt(1000); // Random guest name
-        return new Guest(name);
     }
-}
