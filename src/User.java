@@ -1,3 +1,5 @@
+package openapi;
+
 
 public class User {    
 	protected String name;

@@ -1,3 +1,5 @@
+package openapi;
+
 public class RegisteredUser extends User {
     private String email;  // unique 
     private String hashedPassword;
