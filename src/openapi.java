@@ -98,7 +98,7 @@ public class openapi {
                     	BaseExercise x = recexercises.get(i);
                     	db.addAIExercise(userId, Date.valueOf(x.getDate()), x.getName(), x.getRepetitions(), x.getSets(), x.getDurationMins());
                     }
-                    System.out.println()
+                    System.out.println(responseBody);
 
                 } catch (Exception e) {
                     // error handling
