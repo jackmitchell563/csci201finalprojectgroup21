@@ -26,7 +26,7 @@ public class UserDatabaseAccess {
                     ResultSet resultSet = statement.executeQuery();
 
                     if (resultSet.next()) {
-                        User user = new User(
+                        UserData user = new UserData(
                             resultSet.getInt("id"), // add 
                             resultSet.getString("email"),
                             resultSet.getString("hashedPassword"),
@@ -64,7 +64,7 @@ public class UserDatabaseAccess {
 
                 StringBuilder jsonResponse = new StringBuilder("[");
                 while (resultSet.next()) {
-                    User user = new User(
+                    UserData user = new UserData(
                         resultSet.getInt("id"), // need to fix the ID/USER Class
                         resultSet.getString("email"),
                         resultSet.getString("hashedPassword"),
@@ -103,14 +103,14 @@ public class UserDatabaseAccess {
             while ((line = in.readLine()) != null) {
                 requestBody.append(line);
             }
-            User newUser = gson.fromJson(requestBody.toString(), User.class);
+            UserData newUser = gson.fromJson(requestBody.toString(), UserData.class);
 
             String query = "INSERT INTO users (email, hashedPassword, weightPounds, heightInches, age, gender, goal) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, newUser.email);
                 statement.setString(2, newUser.hashedPassword);
-                statement.setInt(3, newUser.weightPounds);
-                statement.setInt(4, newUser.heightInches);
+                statement.setInt(3, newUser.weight);
+                statement.setInt(4, newUser.height);
                 statement.setInt(5, newUser.age);
                 statement.setString(6, newUser.gender);
                 statement.setString(7, newUser.goal);
@@ -140,14 +140,14 @@ public class UserDatabaseAccess {
             while ((line = in.readLine()) != null) {
                 requestBody.append(line);
             }
-            User updatedUser = gson.fromJson(requestBody.toString(), User.class);
+            UserData updatedUser = gson.fromJson(requestBody.toString(), UserData.class);
 
             String query = "UPDATE users SET email = ?, hashedPassword = ?, weightPounds = ?, heightInches = ?, age = ?, gender = ?, goal = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, updatedUser.email);
                 statement.setString(2, updatedUser.hashedPassword);
-                statement.setInt(3, updatedUser.weightPounds);
-                statement.setInt(4, updatedUser.heightInches);
+                statement.setInt(3, updatedUser.weight);
+                statement.setInt(4, updatedUser.height);
                 statement.setInt(5, updatedUser.age);
                 statement.setString(6, updatedUser.gender);
                 statement.setString(7, updatedUser.goal);

@@ -10,115 +10,149 @@ import java.time.LocalDate;
  */
 public class UserData {
 
-    // list to hold Exercise objects
+    // List to hold Exercise objects
     private List<Exercise> exercises;
 
-    // user's age in years
-    private int age;
+    // User's age in years
+    int age;
 
-    // user's gender represented as a single character
-    private char gender;
+    // User's gender represented as a String
+    private String gender;
 
-    // user's height in inches
-    private int height;
+    // User's height in inches
+     private int height;
 
-    // user's weight in pounds
-    private int weight;
+    // User's weight in pounds
+  private int weight;
 
-    // user's fitness goal as a String
+    // User's fitness goal as a String
     private String goal;
-    
-    // current date as a Date object
+
+    // Current date as a Date object
     private Date currDate;
 
+    // Additional fields for email and hashedPassword
+    private String email;
+    String hashedPassword;
+
+    // User ID from the database
+    private int id;
+
+    // Default constructor
     public UserData() {
         this.exercises = null;
         this.age = 0;
-        this.gender = '\0';
+        this.gender = null;
         this.height = 0;
         this.weight = 0;
         this.goal = null;
         this.currDate = Date.valueOf(LocalDate.now());
+        this.email = null;
+        this.hashedPassword = null;
+        this.id = 0;
     }
 
-    public UserData(List<Exercise> exercises, int age, char gender, int height, int weight, String goal, Date currDate) {
-        this.exercises = exercises;
+    // Constructor for database integration
+    public UserData(
+        int id,
+        String email,
+        String hashedPassword,
+        int weight,
+        int height,
+        int age,
+        String gender,
+        String goal
+    ) {
+        this.id = id;
+        this.email = email;
+        this.hashedPassword = hashedPassword;
+        this.weight = weight;
+        this.height = height;
         this.age = age;
         this.gender = gender;
-        this.height = height;
-        this.weight = weight;
         this.goal = goal;
-        this.currDate = currDate;
+        this.currDate = Date.valueOf(LocalDate.now());
     }
 
-    // getter for exercises
+    // Getters and setters
     public List<Exercise> getExercises() {
         return exercises;
     }
 
-    // setter for exercises
     public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
     }
 
-    // getter for age
     public int getAge() {
         return age;
     }
 
-    // setter for age
     public void setAge(int age) {
         this.age = age;
     }
 
-    // getter for gender
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    // setter for gender
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    // getter for height
     public int getHeight() {
         return height;
     }
 
-    // setter for height
     public void setHeight(int height) {
         this.height = height;
     }
 
-    // getter for weight
     public int getWeight() {
         return weight;
     }
 
-    // setter for weight
     public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    // getter for goal
     public String getGoal() {
         return goal;
     }
 
-    // setter for goal
     public void setGoal(String goal) {
         this.goal = goal;
     }
-    
-    // getter for currDate
+
     public Date getDate() {
         return currDate;
     }
 
-    // setter for currDate
-    public void getDate(Date currDate) {
+    public void setDate(Date currDate) {
         this.currDate = currDate;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
+

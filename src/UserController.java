@@ -5,7 +5,7 @@ public class UserController {
 
 	public static void processRequest(String httpM, String uri, BufferedReader in, PrintWriter out) {
 	    if ("GET".equalsIgnoreCase(httpM)) {
-	        UserDatabaseAccess.getUser(uri, out); // fix the getUser as well....
+	        UserDatabaseAccess.getUserById(uri, out); // fix the getUser as well....
 	    } else if ("POST".equalsIgnoreCase(httpM)) {
 	        UserDatabaseAccess.createUser(in, out);
 	    } else if ("PUT".equalsIgnoreCase(httpM)) {
