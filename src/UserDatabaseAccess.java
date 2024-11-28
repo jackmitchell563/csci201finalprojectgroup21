@@ -65,7 +65,7 @@ public class UserDatabaseAccess {
                 StringBuilder jsonResponse = new StringBuilder("[");
                 while (resultSet.next()) {
                     User user = new User(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("id"), // need to fix the ID/USER Class
                         resultSet.getString("email"),
                         resultSet.getString("hashedPassword"),
                         resultSet.getInt("weightPounds"),
