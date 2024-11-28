@@ -1,3 +1,5 @@
+package openapi;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +12,7 @@ import java.util.List;
 public class DatabaseHandler {
 	private static final String URL = "jdbc:mysql://localhost/FitnessTracker";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "rootPassword"; // change to your password
+    private static final String PASSWORD = ""; // change to your password
     
 	private Connection connection;
 	private Statement st;
@@ -18,7 +20,7 @@ public class DatabaseHandler {
 
 	public DatabaseHandler() {
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/FitnessTracker?user=root&password=rootPassword");  
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/FitnessTracker?user=root");  
 			st = connection.createStatement();
 		}
 		catch (SQLException e) {
@@ -101,6 +103,38 @@ public class DatabaseHandler {
 	        e.printStackTrace();
 	    }
 	    return exercises;
+	}
+	
+	public List<Exercise> getExercisesByUserIdPreviousWeek(int userId, Date date) {
+		Date newdate = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
+	    List<Exercise> exercises = new ArrayList<>();
+	    String query = String.format("SELECT * FROM Exercise WHERE user_id=%d AND date < '%tF' AND date >= '%tF'", userId, date, new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000));
+	    try {
+	        ResultSet rs = st.executeQuery(query);
+	        while (rs.next()) {
+	            int id = rs.getInt("id");
+	            Date date2 = rs.getDate("date");
+	            String name = rs.getString("name");
+	            int repetitions = rs.getInt("repetitions");
+	            int sets = rs.getInt("sets");
+	            int durationMins = rs.getInt("duration_mins");
+	            int isAISuggestion = rs.getInt("is_AI_Suggestion");
+	            Exercise exercise = new Exercise(id, userId, date2, name, repetitions, sets, durationMins, isAISuggestion);
+	            exercises.add(exercise);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return exercises;
+	}
+	
+	public void addAIExercise(int userId, Date date, String name, int repetitions, int sets, int durationMins) {
+		try{
+			String query = String.format("INSERT INTO Exercise (user_id, date, name, repetitions, sets, duration_mins, is_ai_suggestion, is_completed) VALUES ('%d', '%tF', '%s', '%d', '%d', '%d', %b, %b)", userId, date, name, repetitions, sets, durationMins, true, false);
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	

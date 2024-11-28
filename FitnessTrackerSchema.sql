@@ -24,6 +24,6 @@ CREATE TABLE Exercise (
     sets INT,
     duration_mins INT,
     is_ai_suggestion BOOLEAN DEFAULT false,
-    is_completed BOOLEAN DEFAULT false
+    is_completed BOOLEAN DEFAULT false,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );

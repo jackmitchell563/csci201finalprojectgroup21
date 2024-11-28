@@ -1,3 +1,5 @@
+package openapi;
+
 import java.sql.Date;
 
 public class Exercise {
@@ -9,7 +11,7 @@ public class Exercise {
     private int sets;
     private int durationMins;
     private Boolean isAISuggestion;
-
+    public Exercise() {}
     public Exercise(int id, int userId, Date date, String name, int repetitions, int sets, int durationMins, int isAISuggestion) {
         this.id = id;
         this.userId = userId;
